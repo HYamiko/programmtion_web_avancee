@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block Title%}
+Page d'accueil
+{% endblock Title%}
+
+    {% block LienEntete %}
+         <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+    {% endblock LienEntete %}
+
+
+
+    {% block body %}
+
+    <div class="body">
+    <div class="container  {% if errorInscription %} right-panel-active {% endif %} "    id="main">
+        <div class="sign-up">
+            <form action="{% url 'inscription' %}" method="POST">
+                {% csrf_token %}
+                <h1>Créer un compte</h1>
+                {% if errorInscription %}
+                    <div class="error-message" id="errorInscription">
+                        {% comment %} {% for error in messages %} {% endcomment %}
+                        
+                            <p>{{ message }}</p>
+                            
+                        {% comment %} {% endfor %} {% endcomment %}
+                </div>
+                {% endif %}
+                <input type="text" name="username" placeholder="Nom d'utilisateur" required="">
+                <input type="text" name="nom" placeholder="Nom" required="">
+                <input type="text" name="prenom" placeholder="Prénom(s)" required="">
+                <input type="email" name="email" placeholder="Email" required="">
+                <input type="password" name="password" placeholder="Mot de passe" required="">
+                <input type="password" name="confirm_password" placeholder="Confirmer le mot de passe" required="">
+                <button type="submit">S'inscrire</button>
+            </form>
+        </div>
+        <div class="sign-in">
+            <form action="{% url 'connexion' %}" method="POST">
+                {% csrf_token %}
+                <h1>Se connecter</h1>
+                {% if errorLogin %}
+                    <div class="error-message" id="errorLogin">
+                        {% comment %} {% for error in messages %} {% endcomment %}
+                        
+                            <p>{{ message }}</p>
+                        
+                        {% comment %} {% endfor %} {% endcomment %}
+                    </div>
+                {% endif %}
+                <input type="text" name="username" placeholder="Nom d'utilisateur" required="">
+                <input type="password" name="password" placeholder="Mot de passe" required="">
+                <a href="#">Mot de passe oublié?</a>
+                <button type="submit">Se connecter</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-left">
+                    <h1>Quel plaisir de vous revoir !</h1>
+                    <p>Pour bénéficier de nos formations, veuillez vous connecter avec vos informations personnelles</p>
+                    <button id="signIn">Se connecter</button>
+                </div>
+                <div class="overlay-right">
+                    <h1>Hello,</h1>
+                    <p>Pour entamer cette nouvelle expérience avec nous, veuillez renseigner vos informations personnelles.</p>
+                    <button id="signUp">S'inscrire</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    {% endblock body %}
+    {% block CodeJs %}
+    <script type="text/javascript">
+        const signUpButton = document.getElementById('signUp');
+        const signInButton = document.getElementById('signIn');
+        const main = document.getElementById('main');
+        const errorlogin = document.getElementById('errorLogin');
+        const errorinscription = document.getElementById('errorInscription');
+    
+        signUpButton.addEventListener('click', () =>{
+            main.classList.add("right-panel-active");
+            errorlogin.innerHTML = '';
+        });
+        signInButton.addEventListener('click', () => {
+            main.classList.remove("right-panel-active");
+            errorinscription.innerHTML = '';
+        });
+    
+    </script>
+    {% endblock CodeJs %}
+
+

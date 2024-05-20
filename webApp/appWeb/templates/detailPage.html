@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+    {% block Title%}Details du cours{% endblock Title%}
+    {% block LienEntete %}
+        <link rel="stylesheet" href=" {% static 'css/detailPage.css' %} ">
+    {% endblock LienEntete %}
+    
+    
+    
+    {% block body %}
+    <div class="container">
+        <!-- <h1 class="matiere">Matière</h1> -->
+        <div class="card-container">
+            <!-- <div class="card"> -->
+                {% if cours.type == "texte" %}
+                    <img src="{% url 'image' id=cours.id %}" alt="">
+                    <!-- <div class="content-card"> -->
+                        <div class="content">
+                            {{cours.contenuText|safe }}
+                        </div>
+                {% elif cours.type == "pdf" %}
+                   <!-- <img src="{% url 'image' id=cours.id %}" alt=""> -->
+                    <!-- <div class="content-card"> -->
+                        <h1>{{cours.titre }}</h1>
+                        <div class="content">
+                            {{cours.description2 }}
+                        </div>
+                        <div class="content">
+                             <embed src="{% url 'pdfcours' id=cours.id %}" type="application/pdf" width="1024px" height="1000px" >
+                        </div>
+                {% else %}
+                    <h1>{{cours.titre }}</h1>
+                    
+                        <div class="content" id="contentDiv">
+                            <img src="{% url 'image' id=cours.id %}" alt="image">
+                            <a href="#" onclick="AfficherVideo()"> <img src="{% static 'images/play.png' %}" alt="play bouton" class="play-btn" ></a>
+                        </div>
+
+                    <video width="1024" height="700"   id="displayVideo">
+                      <source src="{% url 'videocours' id=cours.id %}" type="video/mp4">
+                      Votre navigateur ne supporte pas la vidéo HTML5.
+                    </video>
+                    <br/><br/><br/><br/>
+                    <p> {{cours.description2 }}</p>
+                    
+    <!-- Code à exécuter si toutes les conditions précédentes sont fausses {% static 'pdf/groupe3.pdf' %}  {% url 'pdfcours' id=cours.id %} -->
+                {% endif %}
+        </div>
+    </div>
+           
+    {% endblock body %}
+
+    
+    {% block CodeJs %}
+        <script src="{% static "js/detailPage.js" %}"></script>
+
+
+    {% endblock CodeJs %}

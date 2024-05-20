@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block Title%}Liste des matières{% endblock Title%}
+
+
+
+    {% block LienEntete %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/matieres.css' %}">
+    {% endblock LienEntete %}
+
+
+    {% block body %}
+    
+
+    
+        <table >
+            <tr>
+                <th>Intitulé</th>
+                <th>Nombre de cours</th>
+            </tr>
+            {% for matiere in allMatieres %}
+            
+                <tr>
+                    
+                    <td> <a href="{% url 'selectmatiere' cours=matiere.matiere__id %}">{{ matiere.matiere__intitule }}</a></td>
+                    <td>{{ matiere.nbre_cours }}</td>
+                </tr>
+            {% endfor %}
+            
+            
+            
+        </table>
+    {% endblock body %}
+
+
+    
+    {% block CodeJs %}
+    {% endblock CodeJs %}

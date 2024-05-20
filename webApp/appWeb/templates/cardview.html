@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+
+    {% block Title%}Cours{% endblock Title%}
+    {% block LienEntete %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/stylecardview.css' %}">
+        <script src="{% static 'js/jquery/jquery-3.7.1.min.js' %}" defer></script>
+    {% endblock LienEntete %}
+
+
+    {% block body %}
+    
+    {% block rechercheIcon %} 
+        <i class="uil uil-search search-icon" id="searchIcon"></i>
+        <div class="search-box">
+            <i class="uil uil-search search-icon" onclick='searchCourses()'></i>
+            {% comment %} <form action="" method="POST"> {% endcomment %}
+            <input type="text" placeholder="Search here..." id="searchInput"/>
+            {% comment %} </form> {% endcomment %}
+        </div>
+    {% endblock rechercheIcon%}
+    
+
+    {% if nbreCours > 0 %}
+        
+        {% for matiere in allMatiere %}
+            {% if matiere.contient_cours %}
+                    <div class="container">
+                        <h1 class="matiere">{{ matiere.intitule }}</h1>
+                        <div class="card-container">
+                            {% for cours in allCours %}
+                                {% if cours.matiere.intitule == matiere.intitule %}
+                                    <div class="card">
+                                        <img src="{% url 'image' id=cours.id %}" alt="">
+                                            {% if cours.type == "video" %}
+                                                <a href="{% url 'detailscours' id=cours.id %}"> <img src="{% static 'images/play.png' %}" alt="" class="play-btn" ></a>
+                                            {% endif %}
+                                        <div class="category">{{cours.matiere}}</div>
+                                        <div class="content-card">
+                                            <a href="{% url 'detailscours' id=cours.id %}"><h2> {{ cours.titre }}</h2></a>
+                                            <p>{{cours.description1}}</p>
+                                            <a href="{% url 'detailscours' id=cours.id %}" class="card-button"> Lire plus</a>
+                                            <span>Type: {{cours.type}}</span>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                    </div>
+            {% endif %}
+
+        {% endfor %}
+    {% else %}
+        <div class="noneReponse">Aucun cours</div>
+    {% endif %}
+
+{% endblock body %}
+
+
+        
+        {% block CodeJs %}
+        
+        <script>
+            {% comment %} function handleSearch(event) {
+                if (event.key === 'Enter') {
+                    searchCourses();
+                }
+            } {% endcomment %}
+            input2 = document.getElementById("searchInput");
+            input2.addEventListener("keydown", function(event) {
+                // Vérification si la touche appuyée est "Entrée"
+                if (event.key === "Enter") {
+                    // Récupération de la valeur de l'input
+                    searchCourses();
+                }
+            });
+
+            function searchCourses() {
+                var input, filter, cards, card, description, i, txtValue;
+                input = document.getElementById("searchInput");
+                filter = input.value.toUpperCase();
+                cards = document.getElementsByClassName("card");
+
+                for (i = 0; i < cards.length; i++) {
+                    card = cards[i];
+                    description = card.querySelector(".content-card p");
+                    txtValue = description.textContent || description.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        card.style.display = "";
+                    } else {
+                        card.style.display = "none";
+                    }
+                }
+            }
+        </script>
+        
+        {% endblock CodeJs %}
+        
+    
+       

@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block Title%}{% endblock Title%}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/line.css' %}">
+
+    <!-- Place the first <script> tag in your HTML's <head> -->
+
+
+<!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+
+
+
+
+ {% block LienEntete %}
+    {% endblock LienEntete %}
+
+</head>
+<body>
+    <nav class="nav">
+        <i class="uil uil-bars navOpenBtn"></i>
+        <a href="#" class="logo">LearningFlex</a>
+
+        <ul class="nav-links">
+            <i class="uil uil-times navCloseBtn"></i>
+            <li><a href="{% url 'cours' %}">Cours</a></li>
+            <li><a href="{% url 'listematieres' %}">Matières</a></li>
+             <li><a href="{% url 'deconnexion' %}">Deconnexion</a></li>
+           <!-- <li><a href="#">About us</a></li>
+            <li><a href="#">Contact us</a></li>  -->
+        </ul>
+        {% block rechercheIcon %} {% endblock rechercheIcon%}
+        
+    </nav>
+
+
+    {% block body %}
+    {% endblock body %}
+
+
+    <div class="footer">designed by group 3</div>
+
+    {% block CodeJs %}
+    {% endblock CodeJs %}
+    
+    <script src="{% static 'js/navbarscript.js' %}" defer></script>
+</body>
+</html>

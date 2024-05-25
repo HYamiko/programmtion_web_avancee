@@ -231,7 +231,7 @@ def payement_valide(request):
 
 
 
-@login_required(login_url='/')
+
 def echec_payement(request):
     return render(request, "echec_payement.html")
 

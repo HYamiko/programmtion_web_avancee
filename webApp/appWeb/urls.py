@@ -11,5 +11,9 @@ urlpatterns=[
     path('pdfcours/<int:id>/', views.affiche_pdf,name='pdfcours'),
     path('videocours/<int:id>/', views.affiche_video,name='videocours'),
     path('listematieres/',views.liste_matieres, name='listematieres'),
-    path('selectmatiere/<int:cours>/', views.displayCoursMatiere, name='selectmatiere')
+    path('selectmatiere/<int:cours>/', views.displayCoursMatiere, name='selectmatiere'),
+    path('passer-payement/',views.passer_payement, name='passer_payement'),
+    path('valide-payement/',views.payement_valide, name='payement_valide'),
+    path('echec_payement/',views.echec_payement, name='echec_payement'),
+    path('payer/',views.create_payment, name='payer')
 ]

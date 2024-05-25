@@ -1,0 +1,50 @@
+.container{
+    height: 100vh;
+    width: 1500px;
+    max-width: 100%;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.infos_paiement{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.texte{
+    margin: 30px;
+}
+
+h1{
+    font-size: 60px;
+    margin: 30px;
+}
+
+p{
+    font-size: 20px;
+    text-align: center;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.infos_paiement img{
+    width: 700px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 40px 0;
+ }
+
+  .button{
+    display: inline-block;
+    background-color:var(--primary-color);
+    color:#fff;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+ }

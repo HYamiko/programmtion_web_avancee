@@ -1,9 +1,10 @@
-import os
-
+#import os
+from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from tinymce.models import HTMLField
-from django.utils.text import slugify
+from django.utils import timezone
+#from django.utils.text import slugify
 class Matiere(models.Model):
     id = models.AutoField(primary_key=True)
     intitule = models.CharField(max_length=30)
@@ -22,7 +23,6 @@ class Cours(models.Model):
         ('pdf', 'PDF'),
         ('texte', 'TEXTE'),
         ('video', 'VIDEO'),
-
     ]
 
     id = models.AutoField(primary_key=True)
@@ -43,3 +43,17 @@ class Cours(models.Model):
 
     def __str__(self):
         return f"{self.titre} {self.matiere}"
+    
+
+
+class Transaction(models.Model):
+    user_id = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_id_trans")
+    token_trans = models.TextField(default='vide')
+    date_trans = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        db_table = 'Transaction'
+        ordering = ["date_trans"]
+
+    def __str__(self) -> str:
+        return f"{self.user_id}"

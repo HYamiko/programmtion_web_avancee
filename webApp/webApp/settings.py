@@ -139,7 +139,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'appWeb/media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-
+APPEND_SLASH = True
 
 TINYMCE_DEFAULT_CONFIG = {
     'height': 700,

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+    {% block Title%}
+        Paiement validé
+    {% endblock Title%}
+
+    {% block LienEntete %}
+        <link rel="stylesheet" type="text/css"  href="{% static 'css/payement.css' %}" >
+    {% endblock LienEntete %}
+
+
+
+    {% block body %}
+        <div class="container">
+            <div class="infos_paiement">
+                <div class="texte">
+                    <h1>Paiement validé</h1>
+                
+                </div>
+                <div class="imge">
+                    <img src="{% static 'images/valide_payement.jpg' %}" alt="image" >
+                </div>
+            </div>
+            <div class="button">
+                <a href="{% url 'cours' %}" class="button"> Accéder aux cours</a>
+            </div>
+        </div>
+    {% endblock body %}
+
+
+    {% block CodeJs %}
+    {% endblock CodeJs %}
+    
